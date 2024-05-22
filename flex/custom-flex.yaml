@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-flex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-flex
+  template:
+    metadata:
+      labels:
+        app: custom-flex
+    spec:
+      imagePullSecrets:
+      - name: ghcr-login-secret
+      containers:
+      - name: custom-flex
+        image: ghcr.io/thomasplantain/custom-flex:1.0.2
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
